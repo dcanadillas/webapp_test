@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    kubernetes {
+      label 'default-java'
+      defaultContainer 'jnlp'
+    }
+  }
   stages {
     stage('build') {
       steps {
@@ -8,19 +13,16 @@ pipeline {
       }
     }
     stage('deploy') {
-      agent {
-        docker {
-          image 'docker'
-        }
-
       }
       input {
         message 'Deploy de application?'
       }
       steps {
         echo 'Deploying the application in Docker container'
-        sh 'docker build -t webapp:myapp .'
-        sh 'docker run -ti -p 8888:8080 -d webapp:myapp'
+        container('docker'){
+          sh 'docker build -t webapp:myapp .'
+          sh 'docker run -ti -p 8888:8080 -d webapp:myapp'
+        } 
       }
     }
     stage('smoke_test') {
