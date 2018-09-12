@@ -13,7 +13,6 @@ pipeline {
       }
     }
     stage('deploy') {
-      }
       input {
         message 'Deploy de application?'
       }
