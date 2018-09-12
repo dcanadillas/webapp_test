@@ -29,6 +29,7 @@ pipeline {
         sh 'curl -I http://localhost:8888/myapp'
       }
     }
+  }
   tools {
     maven 'M3'
   }
