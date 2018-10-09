@@ -13,15 +13,15 @@ pipeline {
       }
     }
     stage('deploy') {
+      input {
+        message "Should we deploy?"
+        ok "Of course!"
+        submitter "dcanadillas"
+      }
       steps {
         echo 'Deploying the application in Docker container'
         container('docker'){
           sh 'docker build -t webapp:myapp .'
-          input {
-            message "Should we deploy?"
-            ok "Of course!"
-            submitter "dcanadillas"
-          }
           sh 'docker run -ti -p 8888:8080 -d webapp:myapp'
         } 
       }
