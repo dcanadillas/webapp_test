@@ -29,12 +29,12 @@ pipeline {
       }
     }
     stage('smoke_test') {
-      container('docker') {
-        steps {
+      
+      steps {
+        container('docker') {
           sh 'curl -I http://localhost:8888/myapp'
         }
       }
-      
     }
   }
   tools {
