@@ -27,6 +27,12 @@ pipeline {
       }
     }
     stage('smoke_test') {
+      agent {
+        kubernetes {
+          label 'default-java'
+          defaultContainer 'docker'
+        }
+      }
       steps {
         sh 'curl -I http://localhost:8888/myapp'
       }
