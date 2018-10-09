@@ -21,21 +21,20 @@ pipeline {
       steps {
         echo 'Deploying the application in Docker container'
         container('docker'){
+          // Let's delete some containers that can be using resources
+          sh 'docker container prune'
           sh 'docker build -t webapp:myapp .'
           sh 'docker run -ti -p 8888:8080 -d webapp:myapp'
         } 
       }
     }
     stage('smoke_test') {
-      agent {
-        kubernetes {
-          label 'default-java'
-          defaultContainer 'docker'
+      container('docker') {
+        steps {
+          sh 'curl -I http://localhost:8888/myapp'
         }
       }
-      steps {
-        sh 'curl -I http://localhost:8888/myapp'
-      }
+      
     }
   }
   tools {
