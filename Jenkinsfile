@@ -23,6 +23,7 @@ pipeline {
         container('docker'){
           // Let's delete some containers that can be using resources
           sh 'docker container prune -f'
+          sh 'docker network prune -f'
           sh 'docker build -t webapp:myapp .'
           sh 'docker run -ti -p 8888:8080 -d webapp:myapp'
         } 
