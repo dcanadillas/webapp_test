@@ -13,9 +13,6 @@ pipeline {
       }
     }
     stage('deploy') {
-      input {
-        message 'Deploy de application?'
-      }
       steps {
         echo 'Deploying the application in Docker container'
         container('docker'){
