@@ -23,9 +23,6 @@ pipeline {
         container('docker'){
           // Let's delete some containers that can be using resources
           sh 'docker ps'
-          input {
-            message "check ports"
-          }
           sh 'docker container prune -f'
           sh 'docker network prune -f'
           sh 'docker image prune -f'
