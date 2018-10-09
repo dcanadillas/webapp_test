@@ -33,7 +33,7 @@ pipeline {
       
       steps {
         container('docker') {
-          sh 'docker run --rm --name my-curl appropriate/curl -fsSL http://localhost:8888/myapp'
+          sh 'docker run --name my-curl --rm appropriate/curl -fsSL http://localhost:8888/myapp'
         }
       }
     }
