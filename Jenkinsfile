@@ -25,6 +25,7 @@ pipeline {
           sh 'docker container prune -f'
           sh 'docker network prune -f'
           sh 'docker image prune -f'
+          sh 'docker system prune -f'
           sh 'docker build -t webapp:myapp .'
           sh 'docker run -ti -p 8888:8080 -d webapp:myapp'
         } 
